@@ -38,8 +38,8 @@ export default function ManagerDetailPage() {
     loadData()
   }, [managerId])
 
-  const handleFavorite = () => {
-    const newState = toggleFavoriteManager(managerId)
+  const handleFavorite = async () => {
+    const newState = await toggleFavoriteManager(managerId)
     setIsFavorited(newState)
   }
 
