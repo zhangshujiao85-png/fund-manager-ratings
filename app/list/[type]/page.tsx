@@ -15,13 +15,18 @@ export default function ListPage() {
   const [managers, setManagers] = useState<FundManager[]>([])
 
   useEffect(() => {
-    initializeData()
+    const loadData = async () => {
+      await initializeData()
 
-    if (listType === 'red') {
-      setManagers(getRedList(50))
-    } else {
-      setManagers(getBlackList(50))
+      if (listType === 'red') {
+        const data = await getRedList(50)
+        setManagers(data)
+      } else {
+        const data = await getBlackList(50)
+        setManagers(data)
+      }
     }
+    loadData()
   }, [listType])
 
   const isRedList = listType === 'red'
