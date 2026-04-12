@@ -30,20 +30,24 @@ export default function RateManagerPage() {
   const [isAnonymous, setIsAnonymous] = useState(true)
 
   useEffect(() => {
-    initializeData()
+    const loadData = async () => {
+      await initializeData()
 
-    const managerData = getFundManagerById(managerId)
-    if (!managerData) {
-      router.push('/explore')
-      return
+      const managerData = await getFundManagerById(managerId)
+      if (!managerData) {
+        router.push('/explore')
+        return
+      }
+
+      setManager(managerData)
+
+      // 检查是否已评分
+      const hasRatedValue = await hasUserRated(managerId)
+      if (hasRatedValue) {
+        router.push(`/manager/${managerId}`)
+      }
     }
-
-    setManager(managerData)
-
-    // 检查是否已评分
-    if (hasUserRated(managerId)) {
-      router.push(`/manager/${managerId}`)
-    }
+    loadData()
   }, [managerId, router])
 
   const calculateOverallScore = () => {

@@ -21,15 +21,21 @@ export default function ManagerDetailPage() {
   const [hasRated, setHasRated] = useState(false)
 
   useEffect(() => {
-    initializeData()
+    const loadData = async () => {
+      await initializeData()
 
-    const managerData = getFundManagerById(managerId)
-    if (managerData) {
-      setManager(managerData)
-      setRatings(getRatings(managerId))
-      setHasRated(hasUserRated(managerId))
-      setIsFavorited(isManagerFavorited(managerId))
+      const managerData = await getFundManagerById(managerId)
+      if (managerData) {
+        setManager(managerData)
+        const ratingsData = await getRatings(managerId)
+        setRatings(ratingsData)
+        const hasRatedValue = await hasUserRated(managerId)
+        setHasRated(hasRatedValue)
+        const isFavoritedValue = isManagerFavorited(managerId)
+        setIsFavorited(isFavoritedValue)
+      }
     }
+    loadData()
   }, [managerId])
 
   const handleFavorite = () => {
