@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
-import { getCurrentUser, getUserRatings, getFundManagers, initializeData, login, logout } from '@/lib/storage'
+import { getCurrentUser, getUserRatings, getFundManagers, initializeData, login, logout, getFundManagerById } from '@/lib/storage'
 import { User, UserRating, FundManager } from '@/types'
 import { Star, Heart, LogOut, LogIn } from 'lucide-react'
 import { formatDate } from '@/lib/utils'
@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null)
   const [myRatings, setMyRatings] = useState<UserRating[]>([])
   const [favoriteManagers, setFavoriteManagers] = useState<FundManager[]>([])
+  const [ratingManagersMap, setRatingManagersMap] = useState<Map<string, FundManager>>(new Map())
   const [activeTab, setActiveTab] = useState<'favorites' | 'ratings'>('favorites')
 
   const handleLogin = () => {
@@ -47,6 +48,16 @@ export default function ProfilePage() {
     const managers = await getFundManagers()
     const favorites = managers.filter(m => currentUser.favoriteManagers.includes(m.id))
     setFavoriteManagers(favorites)
+
+    // 加载评分对应的基金经理数据
+    const managerMap = new Map<string, FundManager>()
+    for (const rating of ratings) {
+      const manager = await getFundManagerById(rating.managerId)
+      if (manager) {
+        managerMap.set(rating.managerId, manager)
+      }
+    }
+    setRatingManagersMap(managerMap)
   }
 
   if (!user) {
@@ -187,12 +198,7 @@ export default function ProfilePage() {
               </div>
             ) : (
               myRatings.map((rating) => {
-                const [manager, setManager] = useState<FundManager | null>(null)
-
-                useEffect(() => {
-                  getFundManagerById(rating.managerId).then(setManager)
-                }, [rating.managerId])
-
+                const manager = ratingManagersMap.get(rating.managerId)
                 if (!manager) return null
 
                 return (
