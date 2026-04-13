@@ -514,6 +514,7 @@ function mapSupabaseRating(data: any): UserRating {
     comment: data.comment,
     helpful: data.helpful,
     notHelpful: data.not_helpful,
+    isAnonymous: data.is_anonymous ?? false,
     createdAt: data.created_at,
   }
 }
