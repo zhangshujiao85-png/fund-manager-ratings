@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 interface RatingSliderProps {
   dimensions: RatingDimensions
   onChange: (dimensions: RatingDimensions) => void
-  readOnly?: false
+  readOnly?: boolean
 }
 
 interface RatingSliderDisplayProps {
