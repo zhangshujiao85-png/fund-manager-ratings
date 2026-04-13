@@ -36,7 +36,6 @@ export interface FundManager {
   company: string
   experience: number        // 从业年限
   managedFunds: number      // 管理基金数量
-  totalAssets: string       // 管理规模（如：523.45亿）
   fundTypes: FundType[]     // 擅长的基金类型
   biography?: string        // 简介
 

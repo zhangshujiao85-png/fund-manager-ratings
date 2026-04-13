@@ -94,7 +94,7 @@ export default function ManagerDetailPage() {
             {/* 基本信息 */}
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="font-bold text-gray-900 mb-4">基本信息</h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-3 bg-gray-50 rounded">
                   <div className="text-lg font-bold text-gray-900">{manager.experience}</div>
                   <div className="text-xs text-gray-500">从业年限</div>
@@ -102,10 +102,6 @@ export default function ManagerDetailPage() {
                 <div className="text-center p-3 bg-gray-50 rounded">
                   <div className="text-lg font-bold text-gray-900">{manager.managedFunds}</div>
                   <div className="text-xs text-gray-500">管理基金</div>
-                </div>
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <div className="text-lg font-bold text-gray-900">{manager.totalAssets}</div>
-                  <div className="text-xs text-gray-500">管理规模</div>
                 </div>
               </div>
               {manager.biography && (

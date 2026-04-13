@@ -481,7 +481,6 @@ function mapSupabaseManager(data: any): FundManager {
     company: data.company,
     experience: data.experience,
     managedFunds: data.managed_funds,
-    totalAssets: data.total_assets,
     fundTypes: data.fund_types,
     biography: data.biography,
     totalRatings: data.total_ratings,

@@ -14,6 +14,7 @@ data_df.columns = headers
 # 列名映射（根据索引）
 col_map = {
     0: 'name',           # 基金经理
+    3: 'total_assets',   # 管理规模
     6: 'experience',     # 证券从业年限
     9: 'fund_count',     # 任职基金数
     16: 'company'        # 基金公司
@@ -49,7 +50,6 @@ for idx, row in data_df.iterrows():
             'company': company,
             'experience': int(experience),
             'managedFunds': fund_count,
-            'totalAssets': '0亿',
             'fundTypes': ['mixed', 'stock'],
             'biography': '',
             'totalRatings': 0,

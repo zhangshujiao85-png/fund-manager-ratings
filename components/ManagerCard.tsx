@@ -52,7 +52,7 @@ export function ManagerCard({ manager, showRank = false, className }: ManagerCar
           </div>
 
           {/* 统计数据 */}
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <div className="text-2xl font-bold text-gray-900">{manager.experience}</div>
               <div className="text-xs text-gray-500 mt-1">从业年限</div>
@@ -60,10 +60,6 @@ export function ManagerCard({ manager, showRank = false, className }: ManagerCar
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <div className="text-2xl font-bold text-gray-900">{manager.managedFunds}</div>
               <div className="text-xs text-gray-500 mt-1">管理基金</div>
-            </div>
-            <div className="text-center p-3 bg-gray-50 rounded-xl">
-              <div className="text-2xl font-bold text-gray-900">{manager.totalAssets}</div>
-              <div className="text-xs text-gray-500 mt-1">管理规模</div>
             </div>
           </div>
 
