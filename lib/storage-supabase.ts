@@ -136,9 +136,9 @@ export async function getFundManagers(): Promise<FundManager[]> {
   }
 
   // localStorage 模式
-  if (typeof window === 'undefined') return MOCK_FUND_MANAGERS
+  if (typeof window === 'undefined') return [...MOCK_FUND_MANAGERS] as FundManager[]
   const data = localStorage.getItem(STORAGE_KEYS.MANAGERS)
-  return data ? JSON.parse(data) : MOCK_FUND_MANAGERS
+  return data ? (JSON.parse(data) as FundManager[]) : [...MOCK_FUND_MANAGERS] as FundManager[]
 }
 
 export async function getFundManagerById(id: string): Promise<FundManager | undefined> {
